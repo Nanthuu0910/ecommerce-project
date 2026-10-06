@@ -113,5 +113,7 @@ def products(request):
 
 
 def user_logout(request):
+    print('Welcome')
     logout(request)
+
     return redirect('login')
