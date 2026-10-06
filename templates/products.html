@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>products</title>
+</head>
+<body>
+    welcome{{request.user.username}}
+    {%for p in products %}
+    <img src="{{product.image.url}}" width="150" height="200">
+    <p>{{p.name}}</p>
+    <p>${{p.price}}</p>
+    {% endfor %}
+    <form method="post">
+        {% csrf_token %}
+        <label>firstname </label>
+        <input type="text" name="firstname">
+        <br>
+        <label>lastname </label>
+        <input type="text" name="lastname">
+        <br>
+        <label>email</label>
+        <input type="email" name="email">
+        <br>
+        <button type="submit">submit</button>
+
+    </form>
+</body>
+</html>

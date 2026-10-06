@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>seller pg</title>
+</head>
+<body>
+    welcome{{request.user.username}}
+    <h1> welcome !! we are glad that you chose our platform to sell </h1>
+    {% for product in products %}
+    <img src="{{product.image.url}}" width="150" height="200">
+    <p>${{product.name}}</p>
+    <p>${{product.price}}</p>
+    {% endfor %}
+{% if request.user.role == 'seller' %}
+seller
+{% if request.user.status == ''%}
+p
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">approve</button>
+    <button type="submit">reject</button>
+</form>
+{% elif seller.status == 'approved' %}
+<p>A</p>
+{% elif seller.status == 'rejected' %}
+<p>r</p>
+
+{% endif %}
+
+{%else%}
+user
+
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<h2>Become a Seller</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <label>Name</label>
+   <input type="text" name="name">
+    <label>Email</label>
+    <input type="text" name="email">
+    <label>Shop Name</label>
+   <input type="text" name="shop_name">
+    <label>Phone</label>
+    <input type="text" name="phone" >
+    <label>Address</label>
+    <textarea name="address"></textarea>
+    <label>Seller / Shop Image</label>
+    <input type="file" name="pic" >
+    <button type="submit"> Apply as Seller </button>
+
+</form>

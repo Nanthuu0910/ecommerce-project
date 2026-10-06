@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    welcome {{request.user.username}}
+{% for app in applications %}
+
+    <p>Name: {{ app.name }}</p>
+    <p>Email: {{ app.email }}</p>
+    <p>Shop: {{ app.shop_name }}</p>
+    <p>Phone: {{ app.phone }}</p>
+    <p>Address: {{ app.address }}</p>
+    <p>Status: {{ app.status }}</p>
+
+    <a href="{% url 'admin_accept' app.id %}">Approve</a>
+
+{% empty %}
+
+    <p>No pending applications.</p>
+
+{% endfor %}
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+</head>
+<body>
+
+    <h1>Welcome, {{ request.user.username }}</h1>
+
+    <p>Email: {{ request.user.email }}</p>
+
+    <p>Role: {{ request.user.role }}</p>
+
+    <hr>
+
+    <h2>User Dashboard</h2>
+
+    <a href="{% url 'products' %}">Products</a>
+    <br>
+
+    <a href="{% url 'become_seller' %}"> Become a Seller</a>
+
+</body>
+</html>
