@@ -1,30 +1,393 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>products</title>
-</head>
-<body>
-    welcome{{request.user.username}}
-    {%for p in products %}
-    <img src="{{product.image.url}}" width="150" height="200">
-    <p>{{p.name}}</p>
-    <p>${{p.price}}</p>
-    {% endfor %}
-    <form method="post">
-        {% csrf_token %}
-        <label>firstname </label>
-        <input type="text" name="firstname">
-        <br>
-        <label>lastname </label>
-        <input type="text" name="lastname">
-        <br>
-        <label>email</label>
-        <input type="email" name="email">
-        <br>
-        <button type="submit">submit</button>
 
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Products
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+@font-face {
+    font-family: 'DancingScript';
+    src: url('{% static "font/DancingScript-Bold.ttf" %}') format('truetype');
+}
+
+.products-page {
+    width: 92%;
+    max-width: 1300px;
+    margin: 45px auto;
+}
+
+/* Heading */
+
+.products-page h1 {
+    text-align: center;
+    color: #5C4033;
+    font-family: 'DancingScript', cursive;
+    font-size: 38px;
+    margin-bottom: 35px;
+}
+
+/* Search */
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin: 25px auto 35px;
+    width: 100%;
+}
+
+.search-form input {
+    width: 350px;
+    padding: 12px 16px;
+    border: 1px solid #D6C3A5;
+    border-radius: 6px 0 0 6px;
+    outline: none;
+    font-size: 15px;
+    background-color: #FFFFFF;
+}
+
+.search-form input:focus {
+    border-color: #8B5E4A;
+}
+
+.search-form button {
+    padding: 12px 25px;
+    border: none;
+    background-color: #5C4033;
+    color: #FFFFFF;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.search-form button:hover {
+    background-color: #8B5E4A;
+}
+
+/* Product Grid */
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+}
+
+/* Product Card */
+
+.product-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E7D7B5;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.3s ease;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 8px 20px rgba(92, 64, 51, 0.15);
+}
+
+/* Product Link */
+
+.product-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+/* Product Image */
+
+.product-image {
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    background-color: #FBF7F0;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+/* Product Details */
+
+.product-details {
+    padding: 18px;
+    text-align: center;
+}
+
+.product-details h2 {
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #5C4033;
+    margin-bottom: 12px;
+}
+
+.product-price {
+    font-size: 19px;
+    font-weight: bold;
+    color: #8B5E4A;
+    margin: 0;
+}
+
+/* No Products */
+
+.no-products {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #8B5E4A;
+}
+
+/* Pagination */
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 5px;
+}
+
+.pagination li a,
+.pagination li span {
+    display: block;
+    padding: 9px 15px;
+    text-decoration: none;
+    color: #5C4033;
+    background-color: #FFFFFF;
+    border: 1px solid #E7D7B5;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.pagination li a:hover {
+    background-color: #E7D7B5;
+}
+
+.pagination li.active span {
+    background-color: #5C4033;
+    color: #FFFFFF;
+    border-color: #5C4033;
+}
+
+.pagination li.disabled span {
+    color: #B5A99A;
+    background-color: #FBF7F0;
+    cursor: not-allowed;
+}
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+    .product-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Small Tablet */
+
+@media (max-width: 750px) {
+    .product-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+
+    .product-image {
+        height: 230px;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 500px) {
+    .products-page {
+        width: 94%;
+        margin: 25px auto;
+    }
+
+    .products-page h1 {
+        font-size: 30px;
+    }
+
+    .product-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .product-image {
+        height: 180px;
+    }
+
+    .product-details {
+        padding: 12px 8px;
+    }
+
+    .product-details h2 {
+        font-size: 14px;
+    }
+
+    .product-price {
+        font-size: 16px;
+    }
+
+    .search-form input {
+        width: 65%;
+    }
+
+    .search-form button {
+        padding: 10px 15px;
+    }
+
+    .pagination li a,
+    .pagination li span {
+        padding: 7px 11px;
+    }
+}
+
+</style>
+
+
+<!-- Search Form -->
+
+<form method="post" action="{% url 'search' %}" class="search-form">
+    {% csrf_token %}
+
+    <input type="text" name="search" placeholder="Search products...">
+
+    <button type="submit">Search</button>
+</form>
+
+
+<div class="products-page">
+
+    <h1>Welcome {{ request.user.username }}</h1>
+
+    <div class="product-container">
+
+        {% for p in page_object %}
+
+        <div class="product-card">
+
+            <a href="{% url 'product_detail' p.id %}" class="product-link">
+
+                {% if p.image %}
+
+                <div class="product-image">
+                    <img src="{{ p.image.url }}" alt="{{ p.name }}">
+                </div>
+
+                {% endif %}
+
+                <div class="product-details">
+
+                    <h2>{{ p.name }}</h2>
+
+                    <p class="product-price">
+                        ₹{{ p.price }}
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p class="no-products">
+            No products available.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- Pagination -->
+
+    <div class="pagination-container">
+
+        <ul class="pagination">
+
+            {% if page_object.has_previous %}
+
+            <li>
+                <a href="?page={{ page_object.previous_page_number }}">
+                    &laquo;
+                </a>
+            </li>
+
+            {% else %}
+
+            <li class="disabled">
+                <span>&laquo;</span>
+            </li>
+
+            {% endif %}
+
+
+            {% for num in page_object.paginator.page_range %}
+
+                {% if page_object.number == num %}
+
+                <li class="active">
+                    <span>{{ num }}</span>
+                </li>
+
+                {% else %}
+
+                <li>
+                    <a href="?page={{ num }}">{{ num }}</a>
+                </li>
+
+                {% endif %}
+
+            {% endfor %}
+
+
+            {% if page_object.has_next %}
+
+            <li>
+                <a href="?page={{ page_object.next_page_number }}">
+                    &raquo;
+                </a>
+            </li>
+
+            {% else %}
+
+            <li class="disabled">
+                <span>&raquo;</span>
+            </li>
+
+            {% endif %}
+
+        </ul>
+
+    </div>
+
+</div>
+
+{% endblock %}

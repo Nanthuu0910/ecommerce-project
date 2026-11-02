@@ -1,64 +1,116 @@
-body { 
-    margin: 0; 
-    padding: 0; 
-    font-family: italic; 
-    background-color: #f5f5f5; 
- 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    min-height: 100vh; 
-} 
- 
-form { 
-    background-color: white; 
-    padding: 30px; 
-    width: 350px; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
-} 
- 
-label { 
-    display: block; 
-    margin-bottom: 6px; 
-    font-weight: bold; 
-    color: #333333; 
-} 
- 
-input, 
-select { 
-    width: 100%; 
-    padding: 10px; 
-    margin-bottom: 15px; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
-    box-sizing: border-box; 
-    font-size: 14px; 
-} 
- 
-input:focus, 
-select:focus { 
-    outline: none; 
-    border-color: #007bff; 
-} 
- 
-button { 
-    width: 100%; 
-    padding: 11px; 
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    font-size: 16px; 
-    cursor: pointer; 
-} 
- 
-button:hover { 
-    background-color: #0056b3; 
-} 
- 
-.messages { 
-    padding: 0; 
-    margin: 5px 0 15px; 
-    list-style: none; 
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Page background */
+body {
+    font-family: Arial, sans-serif;
+    background: #FBF7F0;
+    color: #17110E;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+/* Registration form */
+form {
+    width: 400px;
+    max-width: 100%;
+    background: #FFFFFF;
+    padding: 40px;
+    border: 1px solid #E7D7B5;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(23, 17, 14, 0.12);
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #3A2922;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Input fields */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    background: #FFFFFF;
+    color: #17110E;
+    border: 1px solid #E7D7B5;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+/* Input focus */
+input:focus {
+    border-color: #B08D57;
+    box-shadow: 0 0 5px rgba(176, 141, 87, 0.3);
+}
+
+/* Django messages */
+.messages {
+    list-style: none;
+    margin-bottom: 15px;
+    padding: 0;
+}
+
+.messages li {
+    background: #F5E8D5;
+    color: #3A2922;
+    padding: 10px;
+    border: 1px solid #E7D7B5;
+    border-radius: 6px;
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+/* Register button */
+button {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #3A2922;
+    border-radius: 6px;
+    background: #3A2922;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #17110E;
+    border-color: #B08D57;
+}
+
+/* Links */
+a {
+    color: #3A2922;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+a:hover {
+    color: #B08D57;
+    text-decoration: underline;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    form {
+        padding: 25px 20px;
+    }
 }

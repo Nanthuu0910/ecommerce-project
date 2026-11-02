@@ -1,0 +1,126 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ category.name }}</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            <a href="{% url 'home' %}">PROJECT</a>
+        </div>
+
+        <div class="nav-link">
+
+            <a href="{% url 'category' 'Men' %}">MEN</a>
+
+            <a href="{% url 'category' 'Women' %}">WOMEN</a>
+
+            <a href="{% url 'category' 'Kids' %}">KIDS</a>
+
+            <a href="{% url 'category' 'Home' %}">HOME</a>
+
+            <a href="{% url 'category' 'Beauty' %}">BEAUTY</a>
+
+            <a href="{% url 'category' 'Accessories' %}">ACCESSORIES</a>
+
+        </div>
+
+        <div class="search-box">
+
+            <span>⌕</span>
+
+            <input type="text" placeholder="Search products">
+
+        </div>
+
+        <div class="right-nav">
+
+            <a href="{% url 'login' %}">
+                <div class="icon">♙</div>
+                <span>Profile</span>
+            </a>
+
+            <a href="#">
+                <div class="icon">♡</div>
+                <span>Wishlist</span>
+            </a>
+
+            <a href="#">
+                <div class="icon">🛍</div>
+                <span>Bag</span>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- CATEGORY TITLE -->
+
+    <div class="category-header">
+
+        <h1>{{ category.name }}</h1>
+
+        <p>Explore our {{ category.name }} collection</p>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <div class="products-container">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            {% if product.image %}
+
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
+            {% endif %}
+
+            <div class="product-details">
+
+                <h3>{{ product.name }}</h3>
+
+                <p>{{ product.description }}</p>
+
+                <h4>₹{{ product.price }}</h4>
+
+                <button>Add to Bag</button>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-products">
+
+            <h2>No products available</h2>
+
+            <p>There are no products in {{ category.name }} yet.</p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>

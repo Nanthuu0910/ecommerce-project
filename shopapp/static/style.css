@@ -1,0 +1,279 @@
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(227, 217, 217);
+}
+
+
+.navbar {
+    height: 80px;
+    width: 100%;
+    background-color: rgb(147, 91, 91);
+    color: white;
+    padding: 0 50px;
+    flex-wrap:wrap;
+    display: flex;
+    align-items: center;
+}
+
+
+.logo {
+    width: 150px;
+    display: flex;
+    align-items: center;
+}
+
+.logo span {
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(166, 174, 166);
+    font-style: italic;
+}
+
+/* Navigation links */
+/* .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 44px;
+    flex-shrink: 0;
+}
+
+.nav-link a {
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #282c3f;
+}
+
+/* Search box */
+/* .search-box {
+    height: 40px;
+    width: 350px;
+
+    display: flex;
+    align-items: center;
+
+    margin-left: 30px;
+    padding: 0 15px;
+
+    background-color: white;
+    border-radius: 5px;
+
+    flex-shrink: 1;
+}
+
+.search-box span {
+    font-size: 20px;
+} */
+
+/* Right navigation */
+/* .right-nav {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+
+    margin-left: auto;
+}
+
+.right-nav a {
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+} */
+
+/* 
+.icon {
+    font-size: 20px;
+}
+.card img{
+    width:150px;
+    heigth:200px;
+    
+}  */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(227, 217, 217);
+    overflow-x: hidden;
+}
+
+.navbar {
+    min-height: 80px;
+    width: 100%;
+    background-color: rgb(147, 91, 91);
+    color: white;
+    padding: 0 50px;
+
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 150px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo span {
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(166, 174, 166);
+    font-style: italic;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 44px;
+    flex-shrink: 0;
+}
+
+.nav-link a {
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #282c3f;
+    white-space: nowrap;
+}
+
+.search-box {
+    height: 40px;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    padding: 0 15px;
+    background-color: white;
+    border-radius: 5px;
+    flex-shrink: 1;
+}
+
+.search-box span {
+    font-size: 20px;
+}
+
+.right-nav {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.right-nav a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.icon {
+    font-size: 20px;
+}
+@media (max-width: 1100px) {
+
+    .navbar {
+        padding: 0 25px;
+    }
+
+    .nav-link {
+        gap: 20px;
+    }
+
+    .search-box {
+        width: 220px;
+        margin-left: 20px;
+    }
+
+    .right-nav {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .navbar {
+        min-height: auto;
+        padding: 15px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .logo {
+        width: auto;
+        flex: 1;
+    }
+    .right-nav {
+        margin-left: auto;
+        gap: 15px;
+    }
+
+    .right-nav a {
+        font-size: 16px;
+    }
+    .nav-link {
+        width: 100%;
+        order: 3;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .nav-link a {
+        font-size: 14px;
+    }
+
+    .search-box {
+        width: 100%;
+        order: 4;
+        margin: 12px 0 0 0;
+    }
+}
+@media (max-width: 480px) {
+
+    .navbar {
+        padding: 12px;
+    }
+
+    .logo span {
+        font-size: 18px;
+    }
+
+    .right-nav {
+        gap: 10px;
+    }
+
+    .right-nav a {
+        font-size: 14px;
+    }
+
+    .nav-link {
+        gap: 5px;
+    }
+
+    .nav-link a {
+        font-size: 12px;
+    }
+
+    .search-box {
+        height: 38px;
+    }
+}

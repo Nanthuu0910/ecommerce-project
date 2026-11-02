@@ -1,38 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>seller pg</title>
-</head>
-<body>
-    welcome{{request.user.username}}
-    <h1> welcome !! we are glad that you chose our platform to sell </h1>
-    {% for product in products %}
-    <img src="{{product.image.url}}" width="150" height="200">
-    <p>${{product.name}}</p>
-    <p>${{product.price}}</p>
-    {% endfor %}
-{% if request.user.role == 'seller' %}
-seller
-{% if request.user.status == ''%}
-p
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">approve</button>
-    <button type="submit">reject</button>
-</form>
-{% elif seller.status == 'approved' %}
-<p>A</p>
-{% elif seller.status == 'rejected' %}
-<p>r</p>
+{% extends 'base.html' %}
 
-{% endif %}
+{% block title %}
+Seller Dashboard
+{% endblock %}
 
-{%else%}
-user
+{% block content %}
+<!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet"> -->
 
-{% endif %}
+<style>
+    body{
+         font-family:
+    }
+    .seller-container {
+        padding: 30px;
+    }
 
-</body>
-</html>
+    .seller-container h1 {
+        margin-bottom: 20px;
+    
+    }
+
+    .add-product {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: rgb(102, 102, 111);
+        color: #B08D57;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .product-card {
+        width: 250px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        text-align: center;
+        background-color: white;
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .update {
+        padding:10px;
+        background-color: #3A2922;;
+        color: white;
+        padding:8px 12px;
+        text-decoration: none;
+        border-radius: 5px;
+         margin-right: 10px;
+    }
+
+    .delete {
+        background-color: rgb(129, 18, 18);
+        color: white;
+        padding:8px 12px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="seller-container">
+
+    <h2>Welcome {{ request.user.username }}</h2>
+
+    <h1>
+        Welcome! We are glad that you chose our platform to sell.
+    </h1>
+
+    <a href="{% url 'add_product' %}" class="add-product">
+        Add Product
+    </a>
+
+    <hr>
+
+    <h2>Your Products</h2>
+
+    <div class="products">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% endif %}
+
+            <h3>{{ product.name }}</h3>
+
+            <p>₹{{ product.price }}</p>
+
+            <p>Category: {{ product.category.name }}</p>
+
+            <a href="{% url 'update_product' product.id %}" class="update">
+                Update
+            </a>
+
+            <a href="{% url 'delete_product' product.id %}" class="delete">
+                Delete
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p>You have not added any products yet.</p>
+
+        {% endfor %}
+        <a href="{% url 'orderdetails_seller' %}">Order Details</a>
+
+    </div>
+
+</div>
+
+{% endblock %}

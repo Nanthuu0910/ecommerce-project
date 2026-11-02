@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block title %}Wishlist{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist</title>
+
+    <style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FBF7F0;
+        color: #17110E;
+    }
+
+    /* Heading */
+
+    h1 {
+        text-align: center;
+        margin: 35px 0;
+        color: #5C4033;
+        font-size: 30px;
+    }
+
+    /* Wishlist Container */
+
+    .wishlist-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 30px auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+    }
+
+    /* Wishlist Card */
+
+    .wishlist-card {
+        background-color: #FFFFFF;
+        border: 1px solid #E7D7B5;
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .wishlist-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 6px 18px rgba(92, 64, 51, 0.15);
+    }
+
+    /* Product Image */
+
+    .wishlist-image {
+        width: 100%;
+        height: 250px;
+        background-color: #FBF7F0;
+        overflow: hidden;
+    }
+
+    .wishlist-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 10px;
+        transition: 0.3s;
+    }
+
+    .wishlist-card:hover img {
+        transform: scale(1.05);
+    }
+
+    /* Product Details */
+
+    .wishlist-details {
+        padding: 18px;
+    }
+
+    .wishlist-details h3 {
+        font-size: 17px;
+        color: #5C4033;
+        margin-bottom: 12px;
+    }
+
+    .wishlist-price {
+        font-size: 19px;
+        font-weight: bold;
+        color: #8B5E4A;
+    }
+
+    /* Empty Wishlist */
+
+    .empty-wishlist {
+        text-align: center;
+        color: #8B5E4A;
+        font-size: 20px;
+        padding: 50px;
+    }
+
+    /* Tablet */
+
+    @media (max-width: 900px) {
+        .wishlist-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* Mobile */
+
+    @media (max-width: 650px) {
+        .wishlist-container {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 94%;
+        }
+
+        .wishlist-image {
+            height: 190px;
+        }
+
+        .wishlist-details {
+            padding: 12px;
+        }
+
+        .wishlist-details h3 {
+            font-size: 14px;
+        }
+
+        .wishlist-price {
+            font-size: 16px;
+        }
+    }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>My Wishlist</h1>
+
+    <div class="wishlist-container">
+
+        {% for item in wishlist %}
+
+        <div class="wishlist-card">
+            <a href="{% url 'product_detail' item.product.id %}">
+
+            {% if item.product.image %}
+
+            <div class="wishlist-image">
+                <img src="{{ item.product.image.url }}"
+                     alt="{{ item.product.name }}">
+            </div>
+
+            {% endif %}
+
+            <div class="wishlist-details">
+
+                <h3>{{ item.product.name }}</h3>
+
+                <p class="wishlist-price">
+                    ₹{{ item.product.price }}
+                </p>
+
+            </div>
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p class="empty-wishlist">
+            Your wishlist is empty.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+</html>
+{% endblock %}

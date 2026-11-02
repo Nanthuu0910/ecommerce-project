@@ -1,0 +1,341 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FBF7F0;
+    color: #17110E;
+}
+
+h2 {
+    text-align: center;
+    color: #5C4033;
+    font-size: 30px;
+    margin: 35px 0;
+}
+
+/* Cart container */
+.cart-container {
+   
+    max-width: 500px;
+    margin:  40px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+/* Individual cart card */
+.cart-card {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background-color: #FFFFFF;
+    padding: 25px;
+    border: 1px solid #E7D7B5;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(92, 64, 51, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.cart-card:hover {
+    box-shadow: 0 6px 15px rgba(92, 64, 51, 0.15);
+}
+
+/* Product image */
+.cart-image {
+    width: 170px;
+    height: 170px;
+    flex-shrink: 0;
+    object-fit: contain;
+    border: 1px solid #E7D7B5;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: #FBF7F0;
+}
+
+/* Product information */
+.cart-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.cart-details h3 {
+    font-size: 22px;
+    color: #5C4033;
+    margin-bottom: 15px;
+    overflow-wrap: anywhere;
+}
+
+.cart-details p {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #5C4033;
+    line-height: 1.5;
+}
+
+.cart-total {
+    font-size: 19px !important;
+    font-weight: bold;
+    color: #8B5E4A !important;
+}
+
+/* Quantity and remove forms */
+.cart-details form {
+    display: inline-block;
+    margin: 5px 5px 0 0;
+    vertical-align: middle;
+}
+
+.cart-details input[type="submit"] {
+    width: 38px;
+    height: 38px;
+    background-color: #E7D7B5;
+    color: #5C4033;
+    border: 1px solid #D6C3A5;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cart-details input[type="submit"]:hover {
+    background-color: #5C4033;
+    color: #FFFFFF;
+}
+
+.cart-details button {
+    padding: 10px 16px;
+    background-color: #efe9e9;
+    color: #8B5E4A;
+    border: 1px solid #8B5E4A;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.cart-details button:hover {
+    background-color: #8B5E4A;
+    color: #FFFFFF;
+}
+
+/* Buy Now button */
+.buy {
+    display: block;
+    width: 220px;
+    margin: 15px auto 0;
+    padding: 14px 25px;
+    cursor: pointer;
+    background-color: #5C4033;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.buy:hover {
+    background-color: #8B5E4A;
+    transform: translateY(-2px);
+}
+
+/* Empty cart */
+.empty-cart {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #FFFFFF;
+    border: 1px solid #E7D7B5;
+    border-radius: 10px;
+}
+
+.empty-cart p {
+    font-size: 20px;
+    color: #8B5E4A;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 28px;
+        margin: 25px 0;
+    }
+
+    .cart-container {
+        width: 94%;
+    }
+
+    .cart-card {
+        gap: 20px;
+        padding: 18px;
+    }
+
+    .cart-image {
+        width: 135px;
+        height: 145px;
+    }
+
+    .cart-details h3 {
+        font-size: 19px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+    h2 {
+        font-size: 25px;
+        margin: 25px 0;
+    }
+
+    .cart-container {
+        width: 94%;
+        gap: 15px;
+    }
+
+    .cart-card {
+        gap: 12px;
+        padding: 12px;
+        align-items: flex-start;
+    }
+
+    .cart-image {
+        width: 95px;
+        height: 115px;
+    }
+
+    .cart-details h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .cart-details p {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .cart-total {
+        font-size: 15px !important;
+    }
+
+    .cart-details input[type="submit"] {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+
+    .cart-details button {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .cart-details form {
+        margin: 4px 3px 0 0;
+    }
+
+    .buy {
+        width: 80%;
+        font-size: 16px;
+    }
+
+    .empty-cart {
+        padding: 40px 15px;
+    }
+
+    .empty-cart p {
+        font-size: 17px;
+    }
+}
+
+</style>
+
+<div class="cart-page">
+
+    <h2>My Cart</h2>
+
+    <div class="cart-container">
+
+        {% for item in items %}
+
+        <div class="cart-card">
+
+            {% if item.product.image %}
+                <img src="{{ item.product.image.url }}"
+                     class="cart-image"
+                     alt="{{ item.product.name }}">
+            {% endif %}
+
+            <div class="cart-details">
+
+                <h3>{{ item.product.name }}</h3>
+
+                <p>Price: ₹{{ item.product.price }}</p>
+
+                <p>Quantity: {{ item.quantity }}</p>
+
+                <p class="cart-total">
+                    Total: ₹{{ item.total }}
+                </p>
+
+                <div class="cart-actions">
+
+                    <form method="post"
+                          action="{% url 'quantity_change' item.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="option" value="increase">
+                        <input type="submit" value="+">
+                    </form>
+
+                    <form method="post"
+                          action="{% url 'quantity_change' item.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="option" value="decrease">
+                        <input type="submit" value="-">
+                    </form>
+
+                    <form method="post"
+                          action="{% url 'remove_cart' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Remove cart</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-cart">
+            <p>Your cart is empty.</p>
+        </div>
+
+        {% endfor %}
+
+        {% if items %}
+        <form method="post" action="{% url 'order' %}">
+            {% csrf_token %}
+            <button type="submit" class="buy">Buy Now</button>
+        </form>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

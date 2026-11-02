@@ -16,5 +16,8 @@ admin.site.register(CustomUser,CustomUserAdmin)
 class SellerAdmin(admin.ModelAdmin):
     list_display=('name', 'email', 'shop_name', 'phone', 'status')
 admin.site.register(Seller,SellerAdmin)
-
+admin.site.register(Category)
+class OrderAdmin(admin.ModelAdmin):
+    list_display=('user','status','payment','time')
+admin.site.register(Order,OrderAdmin)
 

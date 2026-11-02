@@ -1,0 +1,190 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Order Details{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+
+    <style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FBF7F0;
+        color: #17110E;
+    }
+
+
+    h2 {
+        text-align: center;
+        margin: 35px 0;
+        color: #5C4033;
+        font-size: 30px;
+    }
+
+    .order-container {
+        width: 90%;
+        max-width: 1000px;
+        margin: 30px auto;
+    }
+
+    .order-card {
+        background-color: #FFFFFF;
+        border: 1px solid #E7D7B5;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 3px 10px rgba(92, 64, 51, 0.08);
+        transition: 0.3s;
+    }
+
+    .order-card:hover {
+        box-shadow: 0 6px 15px rgba(92, 64, 51, 0.15);
+        transform: translateY(-3px);
+    }
+
+    .order-card h3 {
+        font-size: 21px;
+        color: #5C4033;
+        margin-bottom: 18px;
+        border-bottom: 1px solid #E7D7B5;
+        padding-bottom: 12px;
+    }
+
+    .order-details {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+
+    .detail {
+        background-color: #FBF7F0;
+        padding: 14px;
+        border-radius: 6px;
+    }
+
+    .detail p {
+        font-size: 14px;
+        color: #8B5E4A;
+        margin-bottom: 6px;
+    }
+
+    .detail span {
+        font-size: 16px;
+        font-weight: bold;
+        color: #5C4033;
+    }
+
+    .status {
+        color: #8B5E4A !important;
+    }
+
+
+    .empty-order {
+        text-align: center;
+        background-color: #FFFFFF;
+        padding: 50px;
+        border-radius: 10px;
+        border: 1px solid #E7D7B5;
+        color: #8B5E4A;
+        font-size: 18px;
+    }
+
+    @media (max-width: 700px) {
+
+        .order-container {
+            width: 94%;
+        }
+
+        .order-card {
+            padding: 18px;
+        }
+
+    }
+
+    @media (max-width: 450px) {
+
+        h2 {
+            font-size: 25px;
+        }
+
+        .order-card h3 {
+            font-size: 18px;
+        }
+
+        .order-details {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .detail {
+            padding: 12px;
+        }
+
+    }
+
+    </style>
+</head>
+
+<body>
+
+    <h2>My Orders</h2>
+
+    <div class="order-container">
+
+        {% for o in order %}
+
+        <div class="order-card">
+
+            <h3>{{ o.product.name }}</h3>
+
+            <div class="order-details">
+
+                <div class="detail">
+                    <p>Quantity</p>
+                    <span>{{ o.quantity }}</span>
+                </div>
+
+                <div class="detail">
+                    <p>Order Status</p>
+                    <span class="status">{{ o.status }}</span>
+                </div>
+
+                <div class="detail">
+                    <p>Payment Method</p>
+                    <span>{{ o.payment }}</span>
+                </div>
+
+                <div class="detail">
+                    <p>Order Date</p>
+                    <span>{{ o.time }}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-order">
+            <p>You haven't placed any orders yet.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+</html>
+{% endblock %}

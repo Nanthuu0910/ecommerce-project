@@ -1,66 +1,104 @@
-body {
+
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background: #FBF7F0;
+    color: #17110E;
+    min-height: 100vh;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+
+    padding: 20px;
 }
 
 form {
-    background-color: white;
-    padding: 30px;
-    width: 300px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 380px;
+    max-width: 100%;
+    background: #FFFFFF;
+    padding: 40px;
+    border: 1px solid #E7D7B5;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(23, 17, 14, 0.12);
 }
 
 label {
     display: block;
     margin-bottom: 8px;
+    font-size: 14px;
     font-weight: bold;
+    color: #3A2922;
 }
 
 input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 12px;
+    margin-bottom: 20px;
+    background: #FFFFFF;
+    color: #17110E;
+    border: 1px solid #E7D7B5;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s ease;
 }
 
 input:focus {
-    border-color: #007bff;
-    outline: none;
+    border-color: #B08D57;
+    box-shadow: 0 0 5px rgba(176, 141, 87, 0.3);
 }
+
 
 button {
     width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 13px;
+    border: 1px solid #3A2922;
+    border-radius: 6px;
+    background: #3A2922;
+    color: #FFFFFF;
     font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    /* color:#FFFFFF; */
+    background: #17110E;
+    border-color: #B08D57;
 }
+
 
 .register {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 20px;
+    color: #776B62;
     font-size: 14px;
 }
 
 .register a {
-    color: #0a325d;
+    color: #3A2922;
     text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s ease;
 }
 
+.register a:hover {
+    color: #B08D57;
+    text-decoration: underline;
+}
+
+
+@media (max-width: 480px) {
+    form {
+        padding: 28px 22px;
+    }
+}

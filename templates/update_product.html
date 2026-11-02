@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Product{% endblock %}
+
+{% block content %}
+
+<style>
+    .cart-container {
+        width: 100%;
+        max-width: 430px;
+        padding: 35px;
+        margin: 50px auto;
+        border: 1px solid #E7D7B5;
+        border-radius: 15px;
+        background-color: #FFFFFF;
+        box-shadow: 0 5px 20px rgba(23,17,14,0.12);
+    }
+
+    .info {
+        width: 100%;
+    }
+
+    .cart-container h2 {
+        text-align: center;
+        font-size: 25px;
+        margin-bottom: 28px;
+        color: #3A2922;
+    }
+
+    .cart-container label {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #3A2922;
+    }
+
+    .cart-container input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #D8C5A3;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        background: #FBF7F0;
+        font-size: 14px;
+        outline: none;
+    }
+
+    .cart-container input:focus {
+        border-color: #B08D57;
+        box-shadow: 0 0 5px rgba(176,141,87,0.3);
+    }
+
+    .cart-container button {
+        width: 100%;
+        padding: 13px;
+        background-color: #3A2922;
+        color: white;
+        border: 1px solid #3A2922;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .cart-container button:hover {
+        background-color: #17110E;
+        border-color: #B08D57;
+    }
+
+    @media (max-width: 480px) {
+        .cart-container {
+            padding: 25px 20px;
+            margin: 30px auto;
+        }
+    }
+</style>
+
+<div class="cart-container">
+
+    <div class="info">
+
+        <h2>UPDATE PRODUCT</h2>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label>NAME</label>
+            <input type="text" name="name" >
+
+            <label>PRICE</label>
+            <input type="number" name="price" >
+
+            <label>IMAGE</label>
+            <input type="file" name="image" accept="image/*">
+
+            <button type="submit">Update Product</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
